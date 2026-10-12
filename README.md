@@ -6,6 +6,55 @@
 
 When covers are in a folder and several drafts are in a chat, the last step is easy to get wrong. This workbench puts your choices together before you hand them off.
 
+## Tell your AI what to prepare
+
+Place the complete repository in a Skill directory supported by your assistant. If it supports slash invocation, use the example below. Otherwise ask it to read this repository's `SKILL.md`; slash syntax is assistant-specific, not a button in the generated page.
+
+```text
+/image-text-publish-workbench
+Prepare an image/text post about organizing a desk for beginners.
+Research the topic, draft headline/body/hashtag options, and generate missing images and covers.
+If I supply a reference gallery, use its layout and palette, replacing old subjects and copy.
+Build the workbench so I can choose and edit. Do not publish.
+```
+
+Replace the topic with a product introduction, tutorial, travel note, educational card or other idea. Image content and count follow your brief; no pose-specific preset is required.
+
+| Option | What to request |
+|---|---|
+| Research | Research first, or use only my supplied material |
+| Images | Generate missing assets, or reuse my images |
+| Gallery reference | Follow my authorized gallery layout/palette, or use no gallery |
+| Full preparation | Start from the topic, prepare research, assets and copy, then build the workbench |
+
+Research and image-production instructions, prompt templates and the local image utility are bundled in this repository. Your assistant supplies authorized browser/search and native image-generation tools. With no such tools, you can still build from existing material. No accounts, provider credentials or author's other private skills are required. Tool availability, login and any paid budget must be handled explicitly.
+
+See [capability origins and scope](docs/capability-origins.md).
+
+[Preparation brief example](examples/preparation-brief.json) is for the Agent; the renderer still uses its original input schema.
+
+## See the workbench
+
+![Privacy-masked image and text workbench preview](docs/screenshots/workbench-preview.png)
+
+Compare covers and image order, then choose the headline and body you want to use. The bottom button copies your selected publishing information for handoff to an AI assistant.
+
+This privacy-masked illustration is based on the presentation example. Conversation content and local paths are covered in pale white; the left card is a suggested invocation, not an execution receipt. The screenshots below show the actual teaching interface in detail. The example does not demonstrate a successful platform post.
+
+### Choose a headline
+
+![Headline candidates and the selected option](docs/screenshots/choose-title.png)
+
+### Choose and edit the body
+
+![Body variants and the selected copy](docs/screenshots/edit-body.png)
+
+### Select topics
+
+![Selectable topics for the image and text package](docs/screenshots/choose-tags.png)
+
+The teaching case uses Chinese content. Your own images, headlines and body text replace these materials when you build a workbench.
+
 ![Materials to reviewed publishing package](docs/workflow.svg)
 
 ## Typical uses
@@ -15,7 +64,7 @@ When covers are in a folder and several drafts are in a chat, the last step is e
 - Tutorials, product introductions, or photo essays that already have source images.
 - Agent users who want AI to prepare candidates and a person to make the final choice.
 
-This tool does not generate images or publish to social networks. `xiaohongshu` is the default handoff platform identifier, not a promise of complete platform integration.
+The HTML builder does not call an image model or publish to social networks. The bundled Agent workflow can optionally research and generate assets before building. `xiaohongshu` is the default handoff platform identifier, not a promise of complete platform integration.
 
 ## Start with a safe demo
 
@@ -52,6 +101,16 @@ python3 scripts/build_workbench.py --input /absolute/path/input.json --output /a
 The builder outputs HTML, normalized `.input.json`, and an `.assets.json` manifest. Image previews are embedded in HTML. Editing in the browser does not rewrite the original HTML or input JSON.
 
 ## Detailed capabilities
+
+### Preparation capabilities
+
+- Research comparable content and facts for the user's topic, recording sources, visible metrics and gaps.
+- Reuse supplied images or use an available image tool to make topic-specific assets and covers.
+- Optionally follow a user-authorized gallery's layout, palette and typography while preserving originals.
+- Draft headline, body and hashtag candidates from actual materials, then build the editable workbench.
+
+**Can preparation run from one request?** Yes, when your assistant has the necessary tools, asset permission and budget. It must report missing access or evidence; the static HTML does not call a model by itself.
+
 
 ![Workbench areas and independent choices](docs/workbench-map.svg)
 

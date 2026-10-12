@@ -1,0 +1,10 @@
+{
+  "topic": "A beginner guide to organizing a desk",
+  "audience": "beginners",
+  "research": "auto",
+  "images": "generate",
+  "reference_mode": "gallery",
+  "gallery": [],
+  "note": "Provide your authorized reference images, or set reference_mode to none. This is an Agent preparation brief, not the renderer input.",
+  "publish": false
+}
