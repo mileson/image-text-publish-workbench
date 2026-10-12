@@ -1,0 +1,4 @@
+interface:
+  display_name: "图文发布工作台"
+  short_description: "把图片和文案整理为可编辑、替换图片、恢复草稿和复制发布信息的本地工作台"
+  default_prompt: "使用 $image-text-publish-workbench 将这组图片与文案整理为图文发布工作台。"

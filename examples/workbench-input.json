@@ -1,0 +1,30 @@
+{
+  "schema_version": "image-text-publish-workbench.input.v1",
+  "document_id": "example-city-walk-01",
+  "topic": "周末城市散步",
+  "platform": "xiaohongshu",
+  "titles": [
+    {
+      "id": "title-1",
+      "label": "轻松出门",
+      "text": "周末散步随手拍"
+    }
+  ],
+  "body_variants": [
+    {
+      "id": "body-1",
+      "label": "简短分享",
+      "text": "慢一点走，也能找到熟悉街道里的新角度。"
+    }
+  ],
+  "tags": [
+    {
+      "name": "城市散步",
+      "selected": true,
+      "reason": "与本组内容直接相关，未验证平台热度",
+      "source_url": null
+    }
+  ],
+  "covers": [],
+  "photos": []
+}

@@ -1,0 +1,42 @@
+'use strict';
+const assert=require('node:assert/strict');
+const C=require('../assets/workbench-core.js');
+const data={document_id:'fixture',topic:'fixture',platform:'xiaohongshu',
+  selected_title_id:'t1',selected_body_id:'b1',selected_cover_id:'c1',
+  titles:[{id:'t1',text:'原始标题'},{id:'t2',text:'另一标题'}],body_variants:[{id:'b1',text:'正文'},{id:'b2',text:'另一正文'}],
+  tags:[{name:'话题',selected:true}],limits:{title:16,body:1000,tags:10},covers:[{id:'c1'}],photos:[{id:'p1'},{id:'p2'}]};
+const assets={c1:{id:'c1',source:'registered',path:'/cover.png'},p1:{id:'p1',source:'registered',path:'/photo1.png'},p2:{id:'p2',source:'registered',path:'/photo2.png'},upload:{id:'upload',source:'uploaded',path:null,data_url:'data:image/png;base64,TEST'}};
+let state=C.defaults(data);
+assert.equal(state.covers.length,3);
+state.title_drafts.t1='改后的标题';state.body_drafts.b2='当前版本';state.body_id='b2';
+state.covers[0].id='upload';state.photos.reverse();
+let selection=C.selection(data,state,assets);
+assert.equal(selection.title,'改后的标题');
+assert.equal(selection.body,'当前版本');
+assert.equal(selection.composed_body,'当前版本\n\n#话题');
+assert.deepEqual(selection.images.map(a=>a.id),['upload','p2','p1']);
+assert.equal(selection.images[0].path,null);
+assert.equal(selection.images[0].data_url,'data:image/png;base64,TEST');
+assert(!('data_url' in C.selection(data,state,assets,false).images[0]));
+let restored=C.restore(data,JSON.parse(JSON.stringify(state)),Object.keys(assets));
+assert.deepEqual(C.selection(data,restored,assets),selection);
+assert.equal(C.count('👋你好'),3);
+state.covers[0].id=state.covers[0].original_id;
+assert.equal(C.selection(data,state,assets).cover.id,'c1');
+restored=C.restore(data,{...state,photos:[{id:'missing',original_id:'p1'}]},Object.keys(assets));
+assert.equal(restored.photos[0].missing,true);
+assert.equal(C.selection(data,restored,assets).ready_for_handoff,false);
+state.title_drafts.t1='x'.repeat(17);
+assert.equal(C.selection(data,state,assets).ready_for_handoff,false);
+const empty={...data,covers:[],photos:[],selected_cover_id:null};
+assert.equal(C.selection(empty,C.defaults(empty),{}).assets_valid,false);
+const noDefault={...data,covers:[{id:'c1'},{id:'c2'},{id:'c3'}],selected_cover_id:null};
+assert.equal(C.selection(noDefault,C.defaults(noDefault),assets).cover,null);
+const tagData={...data,tags:Array.from({length:11},(_,i)=>({name:'话题'+i,selected:false}))};
+const overTags=C.defaults(tagData);overTags.tags=tagData.tags.map(t=>t.name);
+assert.equal(C.selection(tagData,overTags,assets).tags_valid,false);
+assert.equal(C.selection(tagData,overTags,assets).ready_for_handoff,false);
+const limited=C.restore(tagData,overTags,Object.keys(assets));
+assert.equal(limited.tags.length,10);
+assert.equal(C.selection(tagData,limited,assets).tags_valid,true);
+console.log('workbench core: current drafts, image order, replacement, recovery, export, and capacity passed');
