@@ -1,158 +1,167 @@
-# Image & Text Publishing Workbench
+# 图文发布工作台
 
-[简体中文](README.zh-CN.md) · [Agent skill](SKILL.md) · MIT
+[完整 Skill](SKILL.md) · MIT
 
-**Turn existing images and draft copy into one local page where you can preview, edit, choose, and copy the final publishing package.**
+**把已有图片和 AI 准备的文案，整理成一个能预览、修改、选择并复制发布信息的本地页面。**
 
-When covers are in a folder and several drafts are in a chat, the last step is easy to get wrong. This workbench puts your choices together before you hand them off.
+图片在文件夹里，标题在聊天里，正文还有好几个版本。真正发布之前，你需要把它们放在一起，看清这次到底用哪张图、哪句话。这个工作台负责这一步。
 
-[Detailed capabilities](#readme-section-1) · [See the workbench](#readme-section-2) · [Typical uses](#readme-section-3) · [Tell your AI what to prepare](#readme-section-4) · [Hand off the reviewed result](#readme-section-6) · [Repository map](#readme-section-7) · [FAQ](#readme-section-8)
+[工作台效果](#readme-section-1) · [适合哪些场景](#readme-section-2) · [第一次使用](#readme-section-3) · [告诉 AI 你想做什么](#readme-section-4) · [仓库导航](#readme-section-7) · [常见问题](#readme-section-8) · [验证与开发](#readme-section-9)
 
 <a id="readme-section-1"></a>
 
-## Detailed capabilities
+## 工作台效果
 
-### Preparation capabilities
+![淡白色遮盖对话与路径后的图文工作台效果示意](docs/screenshots/workbench-preview.png)
 
-- Research comparable content and facts for the user's topic, recording sources, visible metrics and gaps.
-- Reuse supplied images or use an available image tool to make topic-specific assets and covers.
-- Optionally follow a user-authorized gallery's layout, palette and typography while preserving originals.
-- Draft headline, body and hashtag candidates from actual materials, then build the editable workbench.
+封面、图片顺序、标题和正文放在同一页里比较。选好之后，点击底部按钮，把当前发布信息复制给 AI 伙伴。
 
-**Can preparation run from one request?** Yes, when your assistant has the necessary tools, asset permission and budget. It must report missing access or evidence; the static HTML does not call a model by itself.
+效果示意来自课件中的图文案例，左侧对话与本机路径已用淡白色遮盖，指令卡展示调用示例，不是实际执行回执。下面的局部截图保留实际演示界面，能看清具体选项。这组画面展示发布准备，不代表内容已在平台发布。
 
+### 选标题
 
-![Workbench areas and independent choices](docs/workbench-map.svg)
+![标题候选与选中状态](docs/screenshots/choose-title.png)
 
-| Capability | What you can do | Boundary |
-|---|---|---|
-| Cover comparison | Select a front-of-strip cover thumbnail | Fewer than three covers get upload slots; larger sets follow input order |
-| Page organization | Add, remove, replace, and reorder inner pages | Source images are not overwritten; cover remains the first handoff image |
-| Title candidates | Edit and select a title directly | Independent of body choices; no fixed five-candidate requirement |
-| Body variants | Switch and edit separate versions | Each variant keeps its own edits |
-| Tag selection | Choose or deselect relevant tags | No claim of verified popularity or traffic |
-| Image uploads | Pick files or drag in JPEG, PNG, WebP | Actual decoding, size, dimensions, and SHA-256 checks; static images only |
-| Draft recovery | Save edits and uploaded originals in the current browser | Storage may be disabled or cleared; URL and browser changes affect recovery |
-| Capacity checks | See title, composed body, and tag limit warnings | Defaults 16/1000/10 are workbench settings, not current official platform rules |
-| Current-state copy | Copy selected text and image information | Missing cover or unrestored images block complete handoff; manual copy fallback |
-| Asset materialization | Save browser uploads as verified local files | Verify all assets before writing; no network upload |
-| Portable preview | Review an HTML page locally | Embedded original images; edits are not written back into source HTML |
+### 选正文、改文案
 
-Default budgets: 32 MiB per image, 200 MiB per set, 36 million pixels per image. Previews keep aspect ratio. EXIF orientation is reflected in display dimensions; original image bytes and metadata are preserved during handoff.
+![正文版本与当前文案](docs/screenshots/edit-body.png)
+
+### 选话题
+
+![图文发布包中的话题选择](docs/screenshots/choose-tags.png)
+
+演示用的是中文内容。生成自己的工作台时，可以替换为自己的图片、标题和正文。
+
+![从材料到发布准备的流程](docs/workflow.svg)
 
 <a id="readme-section-2"></a>
 
-## See the workbench
+## 适合哪些场景
 
-![Privacy-masked image and text workbench preview](docs/screenshots/workbench-preview.png)
+- 图文创作者：对比几张封面，调整内页顺序，再选标题和正文。
+- 品牌或内容团队：把 AI 草稿交给同事复核，直接在同一个页面改。
+- 教程、产品介绍、城市散步等题材：已有图片，想整理成一份可交接的发布材料。
+- 使用 AI 伙伴的人：让 AI 先准备候选，自己最后选择，不必在聊天记录里翻找。
 
-Compare covers and image order, then choose the headline and body you want to use. The bottom button copies your selected publishing information for handoff to an AI assistant.
-
-This privacy-masked illustration is based on the presentation example. Conversation content and local paths are covered in pale white; the left card is a suggested invocation, not an execution receipt. The screenshots below show the actual teaching interface in detail. The example does not demonstrate a successful platform post.
-
-### Choose a headline
-
-![Headline candidates and the selected option](docs/screenshots/choose-title.png)
-
-### Choose and edit the body
-
-![Body variants and the selected copy](docs/screenshots/edit-body.png)
-
-### Select topics
-
-![Selectable topics for the image and text package](docs/screenshots/choose-tags.png)
-
-The teaching case uses Chinese content. Your own images, headlines and body text replace these materials when you build a workbench.
-
-![Materials to reviewed publishing package](docs/workflow.svg)
+HTML 页面负责选择与编辑；打包的 Agent 流程可按需调研和生图，随后生成页面，不自动发布到社交平台。默认平台标识是 `xiaohongshu`；这是交接信息，不代表已经完成所有平台适配。
 
 <a id="readme-section-3"></a>
 
-## Typical uses
+## 第一次使用
 
-- Creators comparing covers, arranging pages, and choosing a headline and body.
-- Content teams reviewing an AI draft together without searching through a chat.
-- Tutorials, product introductions, or photo essays that already have source images.
-- Agent users who want AI to prepare candidates and a person to make the final choice.
+这是一个可供 AI 读取的 Skill，也包含能直接运行的脚本。你不需要先配置社交平台账号。
 
-The HTML builder does not call an image model or publish to social networks. The bundled Agent workflow can optionally research and generate assets before building. `xiaohongshu` is the default handoff platform identifier, not a promise of complete platform integration.
-
-<a id="readme-section-4"></a>
-
-## Tell your AI what to prepare
-
-Place the complete repository in a Skill directory supported by your assistant. If it supports slash invocation, use the example below. Otherwise ask it to read this repository's `SKILL.md`; slash syntax is assistant-specific, not a button in the generated page.
-
-```text
-/image-text-publish-workbench
-Prepare an image/text post about organizing a desk for beginners.
-Research the topic, draft headline/body/hashtag options, and generate missing images and covers.
-If I supply a reference gallery, use its layout and palette, replacing old subjects and copy.
-Build the workbench so I can choose and edit. Do not publish.
-```
-
-Replace the topic with a product introduction, tutorial, travel note, educational card or other idea. Image content and count follow your brief; no pose-specific preset is required.
-
-| Option | What to request |
-|---|---|
-| Research | Research first, or use only my supplied material |
-| Images | Generate missing assets, or reuse my images |
-| Gallery reference | Follow my authorized gallery layout/palette, or use no gallery |
-| Full preparation | Start from the topic, prepare research, assets and copy, then build the workbench |
-
-Research and image-production instructions, prompt templates and the local image utility are bundled in this repository. Your assistant supplies authorized browser/search and native image-generation tools. With no such tools, you can still build from existing material. No accounts, provider credentials or author's other private skills are required. Tool availability, login and any paid budget must be handled explicitly.
-
-See [capability origins and scope](docs/capability-origins.md).
-
-[Preparation brief example](examples/preparation-brief.json) is for the Agent; the renderer still uses its original input schema.
-
-<a id="readme-section-5"></a>
-
-## Start with a safe demo
-
-1. Download the ZIP using **Code → Download ZIP**, or clone this repository.
-2. Reuse an existing Python 3.10+ environment if available. From the repository directory:
+1. 点击 GitHub 的 **Code → Download ZIP**，解压；或者克隆此仓库。
+2. 使用 Python 3.10+。如果已有可用的 Python 环境，直接复用。在仓库目录安装依赖：
 
 ```bash
 python3 -m pip install -r requirements.txt
+```
+
+3. 先跑全部使用合成图片的示例：
+
+```bash
 python3 examples/create_demo.py
 ```
 
-3. Open `output/demo.html` locally. Choose a title and body independently, toggle tags, replace a cover, and reorder pages.
-4. Use the bottom buttons to copy the current selection, title, or body with tags.
+4. 打开生成的 `output/demo.html`。点击标题、正文版本和话题，尝试上传自己的封面，再检查内页顺序。
+5. 页面底部有 **复制发布信息给 AI**、**复制标题**、**复制正文与话题**。复制得到的是当前选择与编辑后的内容。
 
-The demo creates clearly labeled synthetic diagrams, not real photos. Generated output is ignored by Git. The browser UI and detailed agent instructions currently use Chinese; both introductory guides are bilingual.
+示例图片上写着 SYNTHETIC DEMO，只演示材料组织方式，不是实际拍摄作品。`output/` 默认不进入 Git。
 
-### Use it with an AI companion
+### 让 AI 伙伴来准备
 
-Place the whole repository folder in a Skill directory supported by your Agent. Follow that Agent's local installation instructions. An Agent with file access can also read `SKILL.md` directly.
+把整个仓库文件夹放进你的 Agent 支持的 Skill 目录。不同 Agent 的安装位置不同；以它的本地说明为准。也可以直接让能读取本地文件的 Agent 先读 `SKILL.md`。
 
-> Read this workbench Skill. Use my attached pictures and draft to prepare two title candidates and two body versions, then build a local review page. Keep source files unchanged. I will make the final selection; do not publish.
+> 请读取图文发布工作台 Skill。我已有这些图片和这份正文，帮我整理两个标题、两个正文版本，生成本地工作台。保留原文件，完成后我来选择，不发布。
 
-The Agent prepares structured JSON and invokes the scripts. The resulting page does not call a model or require an API key.
+把图片作为附件或提供存在的文件路径。AI 准备输入 JSON，然后运行校验与构建脚本；页面本身不连接模型，也不需要 API key。
 
-### Bring your own materials
+### 使用自己的材料
 
-Copy `examples/workbench-input.json` and follow the [input contract](references/input-contract.md). Each registered image uses an existing absolute local path. Empty image arrays are allowed for upload slots; at least one title and one body candidate are required.
+复制 `examples/workbench-input.json`，按 [输入合同](references/input-contract.md) 修改。图片的 `path` 必须是你电脑上存在的绝对路径；没有图片时可以留空槽，在页面上传。标题和正文各至少一个候选。
 
 ```bash
 python3 scripts/validate_workbench.py --input /absolute/path/input.json
 python3 scripts/build_workbench.py --input /absolute/path/input.json --output /absolute/path/workbench.html
 ```
 
-The builder outputs HTML, normalized `.input.json`, and an `.assets.json` manifest. Image previews are embedded in HTML. Editing in the browser does not rewrite the original HTML or input JSON.
+产物包括 HTML、规范输入 `.input.json` 和素材清单 `.assets.json`。HTML 内嵌图片预览，可在源图片移动后继续看图；要把图片交给后续任务时，仍会核验原路径和内容。
+
+<a id="readme-section-4"></a>
+
+## 告诉 AI 你想做什么
+
+把完整仓库放进你的 AI 助手支持的 Skill 目录。支持斜杠调用的助手可以使用下面的指令；其他助手可以直接让它读取仓库里的 `SKILL.md`。斜杠形式取决于所用助手，不是网页里的按钮。
+
+```text
+/image-text-publish-workbench
+准备一篇关于桌面整理的图文，面向第一次接触这个主题的人。
+先调研，准备标题、正文和话题；需要图片时生成图片和封面。
+有参考图册就参考构图与配色，不沿用旧主题和旧文案。
+最后生成工作台，让我选择和修改。不要发布。
+```
+
+把“桌面整理”换成你的主题即可。产品介绍、教程、旅行笔记、知识卡片都可以，图片内容和数量按任务确定。
+
+| 选项 | 你可以怎么说 |
+|---|---|
+| 调研 | “先调研”或“只用我的材料，不调研” |
+| 图片准备 | “帮我生图”或“复用这些图片” |
+| 图册参考 | “参考这份图册的构图与配色”或“不用参考图册” |
+| 全流程 | “从主题开始，调研、准备图片和文案，再生成工作台” |
+
+调研、生图的执行流程和提示词已经打包在本仓库的 [capabilities](capabilities/research/SKILL.md) 中，图片整理工具也随仓库分发。使用时需要你的 AI 助手有可用的浏览器或搜索、生图工具；没有这些工具仍可使用已有材料生成工作台。不会内置账号或密钥，也不会仅凭一句指令绕过付费、登录和授权。
+
+能力来源与集成范围见 [说明](docs/capability-origins.md)。
+
+[前置准备示例](examples/preparation-brief.json)给 Agent 读取；最终工作台仍使用原来的输入格式。
+
+<a id="readme-section-5"></a>
+
+## 能做什么
+
+### 前置准备能力
+
+- 按用户主题调研同类内容与事实，记录来源、可见互动数据和缺口。
+- 复用用户图片，或调用可用生图工具制作当前主题的图片与封面。
+- 可选参考用户图册的构图、配色和版式，保留原图，生成新副本。
+- 根据实际材料生成标题、正文和话题候选，再输出可编辑工作台。
+
+**可以完全自动准备吗？** 在你的 AI 助手具备相应工具、素材授权和必要预算时，可以用一次请求串起准备流程。登录、工具不可用或事实缺失时会报告缺口；静态页面不会自己调用模型。
+
+
+![工作台区域及选择关系示意](docs/workbench-map.svg)
+
+| 能力 | 你可以做什么 | 具体边界 |
+|---|---|---|
+| 封面比较 | 前置封面缩略图，点击选中 | 少于三张补上传空槽；多于三张按输入展示 |
+| 内页整理 | 增加、移除、替换及调整内页顺序 | 不覆盖原始图片；封面始终是交接首图 |
+| 标题候选 | 直接编辑并选择标题 | 与正文独立，不强制五套 |
+| 正文版本 | 独立编辑和切换各版本 | 切换不会把别的版本覆盖 |
+| 话题选择 | 查看、选择或取消话题 | 不承诺热度；来源未知保留未知 |
+| 图片上传 | 点击或拖入 JPEG、PNG、WebP | 实际解码、尺寸、大小及内容指纹校验；仅静态图片 |
+| 草稿恢复 | 当前浏览器后台保存编辑和上传原图 | 依赖浏览器存储；清理数据、换地址或换浏览器可能影响恢复 |
+| 内容检查 | 提醒标题、正文与话题数量超限 | 默认 16/1000/10 是工作台配置，不是平台实时官方限制 |
+| 当前稿复制 | 复制当前标题、正文、话题和所选图片信息 | 缺封面或有未恢复图片时阻断完整交接；失败可手动复制 |
+| 素材落盘 | 把页面上传的原图变成可核验的本地文件 | 先验证全部图片，再写入指定目录；不上传网络 |
+| 单文件预览 | 在本地打开 HTML 评审 | 图片内嵌；编辑不会自动写回原 HTML |
+
+默认资源预算：单图 32 MiB、整组 200 MiB、每张不超过 3600 万像素。预览保留比例，不自动裁图。EXIF 方向会用于展示尺寸；原始图片字节和元数据不会因落盘而改变。
 
 <a id="readme-section-6"></a>
 
-## Hand off the reviewed result
+## 把选好的材料交给下一步
 
-Browser uploads have no known absolute path. Never infer one from a filename. Save the copied publishing information as text or export the selection object as JSON, then run:
+页面复制的发布信息含当前稿和图片。浏览器上传图片没有天然本地路径，因此不能凭文件名猜测它在哪个文件夹。
+
+把复制内容保存为文本，或把页面接口返回的选择对象保存为 JSON，再运行：
 
 ```bash
 python3 scripts/materialize_selection.py --selection /absolute/path/publish-selection.json --output-dir /absolute/path/current-assets
 ```
 
-This writes verified uploaded originals and `publish-selection.resolved.json`. A separately authorized workflow handles actual publication. For Agent integrations:
+脚本会输出 `publish-selection.resolved.json` 并落盘上传原图。实际发布需要另外获得授权的任务接手。开发者可读取：
 
 ```javascript
 await window.workbenchReady;
@@ -162,56 +171,56 @@ const draft = await window.getWorkbenchDraft();
 
 <a id="readme-section-7"></a>
 
-## Repository map
+## 仓库导航
 
-| Entry | Contents |
+| 入口 | 内容 |
 | --- | --- |
-| [`SKILL.md`](SKILL.md) | Agent instructions and entry point |
-| [`assets/`](assets/) | Images and static assets |
-| [`capabilities/`](capabilities/) | Preparation capability modules |
-| [`docs/`](docs/) | Project documentation and references |
-| [`examples/`](examples/) | Example inputs and usage |
-| [`references/`](references/) | Skill rules and input/output contracts |
-| [`scripts/`](scripts/) | Development and maintenance scripts |
+| [`SKILL.md`](SKILL.md) | Agent 使用规则与执行入口 |
+| [`assets/`](assets/) | 项目图片与静态素材 |
+| [`capabilities/`](capabilities/) | 可独立阅读的能力模块 |
+| [`docs/`](docs/) | 项目说明与参考文档 |
+| [`examples/`](examples/) | 可参考的输入与调用示例 |
+| [`references/`](references/) | 技能规则与输入输出合同 |
+| [`scripts/`](scripts/) | 开发与维护脚本 |
 
 <a id="readme-section-8"></a>
 
-## FAQ
+## 常见问题
 
-**Can I start without images?** Yes. Empty slots accept uploads later. A complete handoff requires a valid selected cover.
+**没有图片还能用吗？** 可以先生成空槽，再上传；完整发布交接需要选好可用封面。
 
-**Do I need five titles and bodies?** No. One of each is enough, and selections are independent.
+**只有一套标题和正文可以吗？** 可以，至少各一套即可，不必凑满五套。
 
-**Does opening the page run AI?** No. An Agent prepares materials upstream; this page is for review and organization.
+**打开 HTML 就会自动调用 AI 吗？** 不会。AI 在上游准备材料，页面负责评审与整理。
 
-**Does it publish automatically?** No. No platform login is required. You choose the next publishing workflow yourself.
+**会替我发布吗？** 不会，也不需要社交平台登录。复制信息后再交给你授权的发布流程。
 
-**Why did my draft disappear after refresh?** Browser storage may be blocked, cleared, or scoped to a different URL. Keep a separate backup of the current selection.
+**为什么刷新后没恢复？** 浏览器存储可能被禁用或清理，文件地址也可能变了。保留当前稿备份，不把浏览器自动保存当唯一备份。
 
-**What if clipboard access fails?** The UI provides a manual-copy fallback. Review copied text before using it.
+**为什么复制按钮被拦截？** 本地页面可能没有剪贴板权限；页面提供手动复制方式。检查最终复制内容后再使用。
 
-**Will replacing an image overwrite the source?** No. Replacement is stored in the browser draft; materialization writes to your chosen output directory.
+**图片上传会覆盖原文件吗？** 不会；替换发生在页面草稿中，落盘写到你指定的输出目录。
 
-**Can I share generated HTML?** Yes, after checking privacy. It embeds original image previews and includes local paths; never commit private generated output.
+**能给其他人发生成的 HTML 吗？** 可以，但它包含原图预览和素材路径；先自行脱敏。不应把含隐私的生成文件提交到公开仓库。
 
-**Does it strip image GPS or EXIF?** No. Original bytes are preserved. Sanitize metadata separately before public sharing.
+**会自动去掉照片的位置和 EXIF 吗？** 不会，上传原图与落盘保留字节。公开分享前单独检查和处理图片元数据。
 
-**Can I use it for another platform?** You can configure identifiers and limits. This does not automatically implement platform-specific adapters or verify live publishing rules.
+**支持其他平台吗？** 输入可设置平台标识和容量；它不自动适配所有平台，也不核验实时发布规则。
 
 <a id="readme-section-9"></a>
 
-## Privacy and license
-
-This public copy removes private execution history and author-specific cover and promotion defaults. The demo uses only synthetic images and generic text. Generated pages can contain your images, text, paths, and metadata; keep them private by default.
-
-Original code and documentation use [MIT](LICENSE). Your photos, fonts, brands, and third-party assets retain their own rights.
-
-<a id="readme-section-10"></a>
-
-## Validation and contribution
+## 验证与开发
 
 ```bash
 python3 scripts/test_workbench.py
 ```
 
-Regression checks cover construction, state, image fingerprints, and handoff. Script success is not visual browser acceptance. See [verification](docs/verification.md), [SKILL.md](SKILL.md), and the [input contract](references/input-contract.md).
+回归覆盖构建、编辑状态、图片指纹与素材交接。自动脚本不等于浏览器视觉验收。发布检查见 [验证记录](docs/verification.md)。完整使用约定见 [SKILL.md](SKILL.md) 和 [输入合同](references/input-contract.md)。
+
+<a id="readme-section-10"></a>
+
+## 隐私与许可证
+
+此公开副本清除了私人执行记录、特定作者的封面与品牌推广偏好。示例仅使用合成图和通用文案。生成文件可能包含你输入的正文、图片、路径和元数据，默认保存在 Git 忽略的目录。
+
+代码和原创文档采用 [MIT](LICENSE)。你提供的照片、字体、品牌和第三方素材仍遵守各自权利，不因工作台导出而转为 MIT。
