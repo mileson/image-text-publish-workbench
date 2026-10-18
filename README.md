@@ -6,6 +6,79 @@
 
 When covers are in a folder and several drafts are in a chat, the last step is easy to get wrong. This workbench puts your choices together before you hand them off.
 
+[Detailed capabilities](#readme-section-1) · [See the workbench](#readme-section-2) · [Typical uses](#readme-section-3) · [Tell your AI what to prepare](#readme-section-4) · [Hand off the reviewed result](#readme-section-6) · [Repository map](#readme-section-7) · [FAQ](#readme-section-8)
+
+<a id="readme-section-1"></a>
+
+## Detailed capabilities
+
+### Preparation capabilities
+
+- Research comparable content and facts for the user's topic, recording sources, visible metrics and gaps.
+- Reuse supplied images or use an available image tool to make topic-specific assets and covers.
+- Optionally follow a user-authorized gallery's layout, palette and typography while preserving originals.
+- Draft headline, body and hashtag candidates from actual materials, then build the editable workbench.
+
+**Can preparation run from one request?** Yes, when your assistant has the necessary tools, asset permission and budget. It must report missing access or evidence; the static HTML does not call a model by itself.
+
+
+![Workbench areas and independent choices](docs/workbench-map.svg)
+
+| Capability | What you can do | Boundary |
+|---|---|---|
+| Cover comparison | Select a front-of-strip cover thumbnail | Fewer than three covers get upload slots; larger sets follow input order |
+| Page organization | Add, remove, replace, and reorder inner pages | Source images are not overwritten; cover remains the first handoff image |
+| Title candidates | Edit and select a title directly | Independent of body choices; no fixed five-candidate requirement |
+| Body variants | Switch and edit separate versions | Each variant keeps its own edits |
+| Tag selection | Choose or deselect relevant tags | No claim of verified popularity or traffic |
+| Image uploads | Pick files or drag in JPEG, PNG, WebP | Actual decoding, size, dimensions, and SHA-256 checks; static images only |
+| Draft recovery | Save edits and uploaded originals in the current browser | Storage may be disabled or cleared; URL and browser changes affect recovery |
+| Capacity checks | See title, composed body, and tag limit warnings | Defaults 16/1000/10 are workbench settings, not current official platform rules |
+| Current-state copy | Copy selected text and image information | Missing cover or unrestored images block complete handoff; manual copy fallback |
+| Asset materialization | Save browser uploads as verified local files | Verify all assets before writing; no network upload |
+| Portable preview | Review an HTML page locally | Embedded original images; edits are not written back into source HTML |
+
+Default budgets: 32 MiB per image, 200 MiB per set, 36 million pixels per image. Previews keep aspect ratio. EXIF orientation is reflected in display dimensions; original image bytes and metadata are preserved during handoff.
+
+<a id="readme-section-2"></a>
+
+## See the workbench
+
+![Privacy-masked image and text workbench preview](docs/screenshots/workbench-preview.png)
+
+Compare covers and image order, then choose the headline and body you want to use. The bottom button copies your selected publishing information for handoff to an AI assistant.
+
+This privacy-masked illustration is based on the presentation example. Conversation content and local paths are covered in pale white; the left card is a suggested invocation, not an execution receipt. The screenshots below show the actual teaching interface in detail. The example does not demonstrate a successful platform post.
+
+### Choose a headline
+
+![Headline candidates and the selected option](docs/screenshots/choose-title.png)
+
+### Choose and edit the body
+
+![Body variants and the selected copy](docs/screenshots/edit-body.png)
+
+### Select topics
+
+![Selectable topics for the image and text package](docs/screenshots/choose-tags.png)
+
+The teaching case uses Chinese content. Your own images, headlines and body text replace these materials when you build a workbench.
+
+![Materials to reviewed publishing package](docs/workflow.svg)
+
+<a id="readme-section-3"></a>
+
+## Typical uses
+
+- Creators comparing covers, arranging pages, and choosing a headline and body.
+- Content teams reviewing an AI draft together without searching through a chat.
+- Tutorials, product introductions, or photo essays that already have source images.
+- Agent users who want AI to prepare candidates and a person to make the final choice.
+
+The HTML builder does not call an image model or publish to social networks. The bundled Agent workflow can optionally research and generate assets before building. `xiaohongshu` is the default handoff platform identifier, not a promise of complete platform integration.
+
+<a id="readme-section-4"></a>
+
 ## Tell your AI what to prepare
 
 Place the complete repository in a Skill directory supported by your assistant. If it supports slash invocation, use the example below. Otherwise ask it to read this repository's `SKILL.md`; slash syntax is assistant-specific, not a button in the generated page.
@@ -33,38 +106,7 @@ See [capability origins and scope](docs/capability-origins.md).
 
 [Preparation brief example](examples/preparation-brief.json) is for the Agent; the renderer still uses its original input schema.
 
-## See the workbench
-
-![Privacy-masked image and text workbench preview](docs/screenshots/workbench-preview.png)
-
-Compare covers and image order, then choose the headline and body you want to use. The bottom button copies your selected publishing information for handoff to an AI assistant.
-
-This privacy-masked illustration is based on the presentation example. Conversation content and local paths are covered in pale white; the left card is a suggested invocation, not an execution receipt. The screenshots below show the actual teaching interface in detail. The example does not demonstrate a successful platform post.
-
-### Choose a headline
-
-![Headline candidates and the selected option](docs/screenshots/choose-title.png)
-
-### Choose and edit the body
-
-![Body variants and the selected copy](docs/screenshots/edit-body.png)
-
-### Select topics
-
-![Selectable topics for the image and text package](docs/screenshots/choose-tags.png)
-
-The teaching case uses Chinese content. Your own images, headlines and body text replace these materials when you build a workbench.
-
-![Materials to reviewed publishing package](docs/workflow.svg)
-
-## Typical uses
-
-- Creators comparing covers, arranging pages, and choosing a headline and body.
-- Content teams reviewing an AI draft together without searching through a chat.
-- Tutorials, product introductions, or photo essays that already have source images.
-- Agent users who want AI to prepare candidates and a person to make the final choice.
-
-The HTML builder does not call an image model or publish to social networks. The bundled Agent workflow can optionally research and generate assets before building. `xiaohongshu` is the default handoff platform identifier, not a promise of complete platform integration.
+<a id="readme-section-5"></a>
 
 ## Start with a safe demo
 
@@ -100,35 +142,7 @@ python3 scripts/build_workbench.py --input /absolute/path/input.json --output /a
 
 The builder outputs HTML, normalized `.input.json`, and an `.assets.json` manifest. Image previews are embedded in HTML. Editing in the browser does not rewrite the original HTML or input JSON.
 
-## Detailed capabilities
-
-### Preparation capabilities
-
-- Research comparable content and facts for the user's topic, recording sources, visible metrics and gaps.
-- Reuse supplied images or use an available image tool to make topic-specific assets and covers.
-- Optionally follow a user-authorized gallery's layout, palette and typography while preserving originals.
-- Draft headline, body and hashtag candidates from actual materials, then build the editable workbench.
-
-**Can preparation run from one request?** Yes, when your assistant has the necessary tools, asset permission and budget. It must report missing access or evidence; the static HTML does not call a model by itself.
-
-
-![Workbench areas and independent choices](docs/workbench-map.svg)
-
-| Capability | What you can do | Boundary |
-|---|---|---|
-| Cover comparison | Select a front-of-strip cover thumbnail | Fewer than three covers get upload slots; larger sets follow input order |
-| Page organization | Add, remove, replace, and reorder inner pages | Source images are not overwritten; cover remains the first handoff image |
-| Title candidates | Edit and select a title directly | Independent of body choices; no fixed five-candidate requirement |
-| Body variants | Switch and edit separate versions | Each variant keeps its own edits |
-| Tag selection | Choose or deselect relevant tags | No claim of verified popularity or traffic |
-| Image uploads | Pick files or drag in JPEG, PNG, WebP | Actual decoding, size, dimensions, and SHA-256 checks; static images only |
-| Draft recovery | Save edits and uploaded originals in the current browser | Storage may be disabled or cleared; URL and browser changes affect recovery |
-| Capacity checks | See title, composed body, and tag limit warnings | Defaults 16/1000/10 are workbench settings, not current official platform rules |
-| Current-state copy | Copy selected text and image information | Missing cover or unrestored images block complete handoff; manual copy fallback |
-| Asset materialization | Save browser uploads as verified local files | Verify all assets before writing; no network upload |
-| Portable preview | Review an HTML page locally | Embedded original images; edits are not written back into source HTML |
-
-Default budgets: 32 MiB per image, 200 MiB per set, 36 million pixels per image. Previews keep aspect ratio. EXIF orientation is reflected in display dimensions; original image bytes and metadata are preserved during handoff.
+<a id="readme-section-6"></a>
 
 ## Hand off the reviewed result
 
@@ -145,6 +159,22 @@ await window.workbenchReady;
 const selection = await window.getPublishReviewSelection();
 const draft = await window.getWorkbenchDraft();
 ```
+
+<a id="readme-section-7"></a>
+
+## Repository map
+
+| Entry | Contents |
+| --- | --- |
+| [`SKILL.md`](SKILL.md) | Agent instructions and entry point |
+| [`assets/`](assets/) | Images and static assets |
+| [`capabilities/`](capabilities/) | Preparation capability modules |
+| [`docs/`](docs/) | Project documentation and references |
+| [`examples/`](examples/) | Example inputs and usage |
+| [`references/`](references/) | Skill rules and input/output contracts |
+| [`scripts/`](scripts/) | Development and maintenance scripts |
+
+<a id="readme-section-8"></a>
 
 ## FAQ
 
@@ -168,6 +198,16 @@ const draft = await window.getWorkbenchDraft();
 
 **Can I use it for another platform?** You can configure identifiers and limits. This does not automatically implement platform-specific adapters or verify live publishing rules.
 
+<a id="readme-section-9"></a>
+
+## Privacy and license
+
+This public copy removes private execution history and author-specific cover and promotion defaults. The demo uses only synthetic images and generic text. Generated pages can contain your images, text, paths, and metadata; keep them private by default.
+
+Original code and documentation use [MIT](LICENSE). Your photos, fonts, brands, and third-party assets retain their own rights.
+
+<a id="readme-section-10"></a>
+
 ## Validation and contribution
 
 ```bash
@@ -175,9 +215,3 @@ python3 scripts/test_workbench.py
 ```
 
 Regression checks cover construction, state, image fingerprints, and handoff. Script success is not visual browser acceptance. See [verification](docs/verification.md), [SKILL.md](SKILL.md), and the [input contract](references/input-contract.md).
-
-## Privacy and license
-
-This public copy removes private execution history and author-specific cover and promotion defaults. The demo uses only synthetic images and generic text. Generated pages can contain your images, text, paths, and metadata; keep them private by default.
-
-Original code and documentation use [MIT](LICENSE). Your photos, fonts, brands, and third-party assets retain their own rights.
