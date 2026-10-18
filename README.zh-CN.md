@@ -6,32 +6,9 @@
 
 图片在文件夹里，标题在聊天里，正文还有好几个版本。真正发布之前，你需要把它们放在一起，看清这次到底用哪张图、哪句话。这个工作台负责这一步。
 
-## 告诉 AI 你想做什么
+[工作台效果](#readme-section-1) · [适合哪些场景](#readme-section-2) · [第一次使用](#readme-section-3) · [告诉 AI 你想做什么](#readme-section-4) · [仓库导航](#readme-section-7) · [常见问题](#readme-section-8) · [验证与开发](#readme-section-9)
 
-把完整仓库放进你的 AI 助手支持的 Skill 目录。支持斜杠调用的助手可以使用下面的指令；其他助手可以直接让它读取仓库里的 `SKILL.md`。斜杠形式取决于所用助手，不是网页里的按钮。
-
-```text
-/image-text-publish-workbench
-准备一篇关于桌面整理的图文，面向第一次接触这个主题的人。
-先调研，准备标题、正文和话题；需要图片时生成图片和封面。
-有参考图册就参考构图与配色，不沿用旧主题和旧文案。
-最后生成工作台，让我选择和修改。不要发布。
-```
-
-把“桌面整理”换成你的主题即可。产品介绍、教程、旅行笔记、知识卡片都可以，图片内容和数量按任务确定。
-
-| 选项 | 你可以怎么说 |
-|---|---|
-| 调研 | “先调研”或“只用我的材料，不调研” |
-| 图片准备 | “帮我生图”或“复用这些图片” |
-| 图册参考 | “参考这份图册的构图与配色”或“不用参考图册” |
-| 全流程 | “从主题开始，调研、准备图片和文案，再生成工作台” |
-
-调研、生图的执行流程和提示词已经打包在本仓库的 [capabilities](capabilities/research/SKILL.md) 中，图片整理工具也随仓库分发。使用时需要你的 AI 助手有可用的浏览器或搜索、生图工具；没有这些工具仍可使用已有材料生成工作台。不会内置账号或密钥，也不会仅凭一句指令绕过付费、登录和授权。
-
-能力来源与集成范围见 [说明](docs/capability-origins.md)。
-
-[前置准备示例](examples/preparation-brief.json)给 Agent 读取；最终工作台仍使用原来的输入格式。
+<a id="readme-section-1"></a>
 
 ## 工作台效果
 
@@ -57,6 +34,8 @@
 
 ![从材料到发布准备的流程](docs/workflow.svg)
 
+<a id="readme-section-2"></a>
+
 ## 适合哪些场景
 
 - 图文创作者：对比几张封面，调整内页顺序，再选标题和正文。
@@ -65,6 +44,8 @@
 - 使用 AI 伙伴的人：让 AI 先准备候选，自己最后选择，不必在聊天记录里翻找。
 
 HTML 页面负责选择与编辑；打包的 Agent 流程可按需调研和生图，随后生成页面，不自动发布到社交平台。默认平台标识是 `xiaohongshu`；这是交接信息，不代表已经完成所有平台适配。
+
+<a id="readme-section-3"></a>
 
 ## 第一次使用
 
@@ -107,6 +88,37 @@ python3 scripts/build_workbench.py --input /absolute/path/input.json --output /a
 
 产物包括 HTML、规范输入 `.input.json` 和素材清单 `.assets.json`。HTML 内嵌图片预览，可在源图片移动后继续看图；要把图片交给后续任务时，仍会核验原路径和内容。
 
+<a id="readme-section-4"></a>
+
+## 告诉 AI 你想做什么
+
+把完整仓库放进你的 AI 助手支持的 Skill 目录。支持斜杠调用的助手可以使用下面的指令；其他助手可以直接让它读取仓库里的 `SKILL.md`。斜杠形式取决于所用助手，不是网页里的按钮。
+
+```text
+/image-text-publish-workbench
+准备一篇关于桌面整理的图文，面向第一次接触这个主题的人。
+先调研，准备标题、正文和话题；需要图片时生成图片和封面。
+有参考图册就参考构图与配色，不沿用旧主题和旧文案。
+最后生成工作台，让我选择和修改。不要发布。
+```
+
+把“桌面整理”换成你的主题即可。产品介绍、教程、旅行笔记、知识卡片都可以，图片内容和数量按任务确定。
+
+| 选项 | 你可以怎么说 |
+|---|---|
+| 调研 | “先调研”或“只用我的材料，不调研” |
+| 图片准备 | “帮我生图”或“复用这些图片” |
+| 图册参考 | “参考这份图册的构图与配色”或“不用参考图册” |
+| 全流程 | “从主题开始，调研、准备图片和文案，再生成工作台” |
+
+调研、生图的执行流程和提示词已经打包在本仓库的 [capabilities](capabilities/research/SKILL.md) 中，图片整理工具也随仓库分发。使用时需要你的 AI 助手有可用的浏览器或搜索、生图工具；没有这些工具仍可使用已有材料生成工作台。不会内置账号或密钥，也不会仅凭一句指令绕过付费、登录和授权。
+
+能力来源与集成范围见 [说明](docs/capability-origins.md)。
+
+[前置准备示例](examples/preparation-brief.json)给 Agent 读取；最终工作台仍使用原来的输入格式。
+
+<a id="readme-section-5"></a>
+
 ## 能做什么
 
 ### 前置准备能力
@@ -137,6 +149,8 @@ python3 scripts/build_workbench.py --input /absolute/path/input.json --output /a
 
 默认资源预算：单图 32 MiB、整组 200 MiB、每张不超过 3600 万像素。预览保留比例，不自动裁图。EXIF 方向会用于展示尺寸；原始图片字节和元数据不会因落盘而改变。
 
+<a id="readme-section-6"></a>
+
 ## 把选好的材料交给下一步
 
 页面复制的发布信息含当前稿和图片。浏览器上传图片没有天然本地路径，因此不能凭文件名猜测它在哪个文件夹。
@@ -154,6 +168,22 @@ await window.workbenchReady;
 const selection = await window.getPublishReviewSelection();
 const draft = await window.getWorkbenchDraft();
 ```
+
+<a id="readme-section-7"></a>
+
+## 仓库导航
+
+| 入口 | 内容 |
+| --- | --- |
+| [`SKILL.md`](SKILL.md) | Agent 使用规则与执行入口 |
+| [`assets/`](assets/) | 项目图片与静态素材 |
+| [`capabilities/`](capabilities/) | 可独立阅读的能力模块 |
+| [`docs/`](docs/) | 项目说明与参考文档 |
+| [`examples/`](examples/) | 可参考的输入与调用示例 |
+| [`references/`](references/) | 技能规则与输入输出合同 |
+| [`scripts/`](scripts/) | 开发与维护脚本 |
+
+<a id="readme-section-8"></a>
 
 ## 常见问题
 
@@ -177,6 +207,8 @@ const draft = await window.getWorkbenchDraft();
 
 **支持其他平台吗？** 输入可设置平台标识和容量；它不自动适配所有平台，也不核验实时发布规则。
 
+<a id="readme-section-9"></a>
+
 ## 验证与开发
 
 ```bash
@@ -184,6 +216,8 @@ python3 scripts/test_workbench.py
 ```
 
 回归覆盖构建、编辑状态、图片指纹与素材交接。自动脚本不等于浏览器视觉验收。发布检查见 [验证记录](docs/verification.md)。完整使用约定见 [SKILL.md](SKILL.md) 和 [输入合同](references/input-contract.md)。
+
+<a id="readme-section-10"></a>
 
 ## 隐私与许可证
 
