@@ -1,18 +1,45 @@
-# 图文发布工作台
+<a id="图文发布工作台"></a>
+
+<div align="center">
+
+# 图文发布工作台 · 发布前预览与选择
+
+**把图片、标题和正文放到同一个本地页面里选好再交付。**
+
+图片预览 · 文案编辑 · 候选选择 · 发布交接
+
+[![中文说明](https://img.shields.io/badge/%E8%AF%B4%E6%98%8E-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-059669)](#readme-detail-12)
+[![项目类型](https://img.shields.io/badge/%E9%A1%B9%E7%9B%AE-Skill-6366f1)](#readme-detail-12)
+
+[👀 效果预览](#readme-detail-12) · [✅ 适用场景](#readme-detail-14) · [🚀 第一次使用](#readme-detail-16) · [🧩 模块速查](#readme-detail-24) · [🤖 给 Agent 的任务示例](#readme-detail-18) · [📌 能做什么](#readme-detail-20)
+
+</div>
+
+---
 
 [完整 Skill](SKILL.md) · MIT
 
-**把已有图片和 AI 准备的文案，整理成一个能预览、修改、选择并复制发布信息的本地页面。**
 
 图片在文件夹里，标题在聊天里，正文还有好几个版本。真正发布之前，你需要把它们放在一起，看清这次到底用哪张图、哪句话。这个工作台负责这一步。
 
-[工作台效果](#readme-section-1) · [适合哪些场景](#readme-section-2) · [第一次使用](#readme-section-3) · [告诉 AI 你想做什么](#readme-section-4) · [仓库导航](#readme-section-7) · [常见问题](#readme-section-8) · [验证与开发](#readme-section-9)
-
 <a id="readme-section-1"></a>
 
-## 工作台效果
+<a id="工作台效果"></a>
 
-![淡白色遮盖对话与路径后的图文工作台效果示意](docs/screenshots/workbench-preview.png)
+<a id="readme-detail-12"></a>
+
+## 👀 效果预览
+
+<table>
+<tr>
+<td width="50%" align="center"><a href="docs/screenshots/workbench-preview.png"><img src="docs/screenshots/workbench-preview.png" alt="淡白色遮盖对话与路径后的图文工作台效果示意" width="360"></a><br><sub>淡白色遮盖对话与路径后的图文工作台效果示意</sub></td>
+<td width="50%" align="center"><a href="docs/screenshots/choose-title.png"><img src="docs/screenshots/choose-title.png" alt="标题候选与选中状态" width="360"></a><br><sub>标题候选与选中状态</sub></td>
+</tr>
+<tr>
+<td width="50%" align="center"><a href="docs/screenshots/edit-body.png"><img src="docs/screenshots/edit-body.png" alt="正文版本与当前文案" width="360"></a><br><sub>正文版本与当前文案</sub></td>
+<td width="50%" align="center"><a href="docs/screenshots/choose-tags.png"><img src="docs/screenshots/choose-tags.png" alt="图文发布包中的话题选择" width="360"></a><br><sub>图文发布包中的话题选择</sub></td>
+</tr>
+</table>
 
 封面、图片顺序、标题和正文放在同一页里比较。选好之后，点击底部按钮，把当前发布信息复制给 AI 伙伴。
 
@@ -20,15 +47,12 @@
 
 ### 选标题
 
-![标题候选与选中状态](docs/screenshots/choose-title.png)
 
 ### 选正文、改文案
 
-![正文版本与当前文案](docs/screenshots/edit-body.png)
 
 ### 选话题
 
-![图文发布包中的话题选择](docs/screenshots/choose-tags.png)
 
 演示用的是中文内容。生成自己的工作台时，可以替换为自己的图片、标题和正文。
 
@@ -36,7 +60,11 @@
 
 <a id="readme-section-2"></a>
 
-## 适合哪些场景
+<a id="适合哪些场景"></a>
+
+<a id="readme-detail-14"></a>
+
+## ✅ 适用场景
 
 - 图文创作者：对比几张封面，调整内页顺序，再选标题和正文。
 - 品牌或内容团队：把 AI 草稿交给同事复核，直接在同一个页面改。
@@ -47,7 +75,11 @@ HTML 页面负责选择与编辑；打包的 Agent 流程可按需调研和生�
 
 <a id="readme-section-3"></a>
 
-## 第一次使用
+<a id="第一次使用"></a>
+
+<a id="readme-detail-16"></a>
+
+## 🚀 第一次使用
 
 这是一个可供 AI 读取的 Skill，也包含能直接运行的脚本。你不需要先配置社交平台账号。
 
@@ -90,7 +122,11 @@ python3 scripts/build_workbench.py --input /absolute/path/input.json --output /a
 
 <a id="readme-section-4"></a>
 
-## 告诉 AI 你想做什么
+<a id="告诉-ai-你想做什么"></a>
+
+<a id="readme-detail-18"></a>
+
+## 🤖 给 Agent 的任务示例
 
 把完整仓库放进你的 AI 助手支持的 Skill 目录。支持斜杠调用的助手可以使用下面的指令；其他助手可以直接让它读取仓库里的 `SKILL.md`。斜杠形式取决于所用助手，不是网页里的按钮。
 
@@ -119,7 +155,11 @@ python3 scripts/build_workbench.py --input /absolute/path/input.json --output /a
 
 <a id="readme-section-5"></a>
 
-## 能做什么
+<a id="能做什么"></a>
+
+<a id="readme-detail-20"></a>
+
+## 📌 能做什么
 
 ### 前置准备能力
 
@@ -151,7 +191,11 @@ python3 scripts/build_workbench.py --input /absolute/path/input.json --output /a
 
 <a id="readme-section-6"></a>
 
-## 把选好的材料交给下一步
+<a id="把选好的材料交给下一步"></a>
+
+<a id="readme-detail-22"></a>
+
+## 📤 交付选好的材料
 
 页面复制的发布信息含当前稿和图片。浏览器上传图片没有天然本地路径，因此不能凭文件名猜测它在哪个文件夹。
 
@@ -171,21 +215,31 @@ const draft = await window.getWorkbenchDraft();
 
 <a id="readme-section-7"></a>
 
-## 仓库导航
+<a id="仓库导航"></a>
 
-| 入口 | 内容 |
-| --- | --- |
-| [`SKILL.md`](SKILL.md) | Agent 使用规则与执行入口 |
-| [`assets/`](assets/) | 项目图片与静态素材 |
-| [`capabilities/`](capabilities/) | 可独立阅读的能力模块 |
-| [`docs/`](docs/) | 项目说明与参考文档 |
-| [`examples/`](examples/) | 可参考的输入与调用示例 |
-| [`references/`](references/) | 技能规则与输入输出合同 |
-| [`scripts/`](scripts/) | 开发与维护脚本 |
+<a id="readme-detail-24"></a>
+
+## 🧩 模块速查
+
+按要处理的工作选择入口，先看模块职责，再进入对应文件或目录。
+
+| 模块入口 | 负责什么 | 什么时候看 |
+| --- | --- | --- |
+| [`SKILL.md`](SKILL.md) | Agent 使用规则与执行入口 | 让 Agent 读取任务规则、所需材料与交付要求 |
+| [`assets/`](assets/) | 项目图片与静态素材 | 维护图片、静态文件和展示素材 |
+| [`capabilities/`](capabilities/) | 可独立阅读的能力模块 | 查找具体场景对应的技能入口 |
+| [`docs/`](docs/) | 项目说明与参考文档 | 查阅运行、设计与维护约定 |
+| [`examples/`](examples/) | 可参考的输入与调用示例 | 用现有样例核对输入格式和调用方式 |
+| [`references/`](references/) | 技能规则与输入输出合同 | 核对输入约定、操作细节与适用边界 |
+| [`scripts/`](scripts/) | 开发与维护脚本 | 查找构建、验证或维护的现有命令 |
 
 <a id="readme-section-8"></a>
 
-## 常见问题
+<a id="常见问题"></a>
+
+<a id="readme-detail-26"></a>
+
+## ❓ 常见问题
 
 **没有图片还能用吗？** 可以先生成空槽，再上传；完整发布交接需要选好可用封面。
 
@@ -209,7 +263,13 @@ const draft = await window.getWorkbenchDraft();
 
 <a id="readme-section-9"></a>
 
-## 验证与开发
+<a id="验证与开发"></a>
+
+<a id="readme-detail-28"></a>
+
+## 🧪 验证与开发
+
+修改后使用项目已有的检查入口核对结果，命令与检查范围如下。
 
 ```bash
 python3 scripts/test_workbench.py
@@ -219,7 +279,11 @@ python3 scripts/test_workbench.py
 
 <a id="readme-section-10"></a>
 
-## 隐私与许可证
+<a id="隐私与许可证"></a>
+
+<a id="readme-detail-30"></a>
+
+## 📄 隐私与许可证
 
 此公开副本清除了私人执行记录、特定作者的封面与品牌推广偏好。示例仅使用合成图和通用文案。生成文件可能包含你输入的正文、图片、路径和元数据，默认保存在 Git 忽略的目录。
 
